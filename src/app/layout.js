@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Appbar from './components/Appbar';
-
+import { StateProvider } from "./context";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -13,8 +13,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Appbar />
-        {children}
+        <StateProvider>
+          <Appbar />
+          {children}  
+        </StateProvider>
       </body>
     </html>
   );
