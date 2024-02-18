@@ -12,7 +12,14 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Link from 'next/link'
-const pages = [
+import { Context } from '../context';
+import { useContext } from 'react';
+
+
+function Appbar() {
+  const { user } = useContext(Context);
+  
+  const pages = [
     {
         href: '/',
         label: 'Home'
@@ -21,9 +28,8 @@ const pages = [
         href: '/login',
         label: 'Login'
     }
-];
+  ];
 
-function Appbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
