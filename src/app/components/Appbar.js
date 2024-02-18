@@ -14,7 +14,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import Link from 'next/link'
 import { Context } from '../context';
 import { useContext } from 'react';
-
+import { auth } from "@/app/firebase";
 
 function Appbar() {
   const { user } = useContext(Context);
@@ -31,6 +31,13 @@ function Appbar() {
   ];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  function logoutUser() {
+    auth.signOut().then( () => {
+      localStorage.removeItem("user");
+      window.location.reload()
+    }).catch(err=>{})
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -99,6 +106,14 @@ function Appbar() {
                     </Link>
                 </MenuItem>
               ))}
+              {
+                user ? 
+                <MenuItem key="logout-button">
+                        <Typography textAlign="center">Logout</Typography>
+                </MenuItem>  
+                :
+                <></>
+              }
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -131,6 +146,19 @@ function Appbar() {
                 {page.label}
               </Button>
             ))}
+            {
+                user ? 
+                <Button
+                key="logout-button"
+                onClick={logoutUser}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Logout
+              </Button>
+   
+                :
+                <></>
+              }
           </Box>
         </Toolbar>
       </Container>

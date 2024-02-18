@@ -8,6 +8,9 @@ export function StateProvider({ children }) {
 
     useEffect( () => {
         let userLocal = localStorage.getItem("user");
+        if (userLocal) {
+            userLocal = JSON.parse(userLocal)
+        }
         setUser(userLocal)
     }, []);
 

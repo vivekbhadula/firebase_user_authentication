@@ -16,7 +16,7 @@ export default function Login() {
         signInWithPopup(auth, googleProvider)
         .then(result => {
             setUser(result.user)
-            localStorage.setItem("user", result.user);
+            localStorage.setItem("user", JSON.stringify(result.user));
         })
         .catch(err => {
             setUser(null)
